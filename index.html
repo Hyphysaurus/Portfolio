@@ -3,12 +3,11 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Mario Ramirez — Portfolio</title>
-
-<meta name="description" content="Software developer building playful, human-centered tools across game dev, SaaS, and creative spaces.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,84 +28,10 @@ line-height:1.6;
 overflow-x:hidden;
 }
 
-/* TOPOGRAPHIC BACKGROUND */
-
-body::before{
-
-content:"";
-position:fixed;
-inset:0;
-pointer-events:none;
-
-background-image:
-radial-gradient(circle at 20% 30%, rgba(90,122,90,.06) 0%, transparent 40%),
-radial-gradient(circle at 80% 60%, rgba(90,122,90,.05) 0%, transparent 45%),
-repeating-linear-gradient(
-0deg,
-rgba(138,133,128,.06),
-rgba(138,133,128,.06) 1px,
-transparent 1px,
-transparent 14px
-);
-
-background-size:120% 120%;
-
-animation:topoDrift 90s linear infinite;
-
-opacity:.35;
-z-index:-1;
-
-}
-
-@keyframes topoDrift{
-0%{transform:translate(0,0)}
-50%{transform:translate(-40px,-20px)}
-100%{transform:translate(0,0)}
-}
-
-/* BASIC */
-
-img{
-display:block;
-width:100%;
-border-radius:12px;
-}
-
-:root{
---green:#5A7A5A;
---green-soft:#E8F0E4;
---card:#F4F2EF;
---text-soft:#6B6560;
---max:1080px;
-}
-
-/* NAV */
-
-nav{
-position:fixed;
-top:0;
-width:100%;
-height:64px;
-background:rgba(250,249,247,.9);
-backdrop-filter:blur(12px);
-border-bottom:1px solid #eae7e3;
-z-index:100;
-}
-
-.nav-inner{
-max-width:var(--max);
-margin:auto;
-height:100%;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 28px;
-}
-
 /* HERO */
 
 .hero{
-max-width:var(--max);
+max-width:1080px;
 margin:auto;
 padding:160px 28px 80px;
 }
@@ -118,19 +43,19 @@ font-weight:400;
 line-height:1.1;
 }
 
-.hero em{color:var(--green)}
+.hero em{color:#5A7A5A}
 
 .hero p{
-margin-top:24px;
+margin-top:20px;
 font-size:18px;
-color:var(--text-soft);
+color:#6B6560;
 max-width:520px;
 }
 
 /* SECTIONS */
 
 section{
-max-width:var(--max);
+max-width:1080px;
 margin:auto;
 padding:60px 28px;
 }
@@ -139,7 +64,7 @@ padding:60px 28px;
 font-size:12px;
 letter-spacing:.12em;
 text-transform:uppercase;
-color:var(--green);
+color:#5A7A5A;
 margin-bottom:30px;
 }
 
@@ -152,15 +77,15 @@ gap:20px;
 }
 
 .now-card{
-background:var(--card);
+background:#F4F2EF;
 padding:24px;
 border-radius:12px;
 transition:.3s;
 }
 
 .now-card:hover{
-background:var(--green-soft);
 transform:translateY(-4px);
+background:#E8F0E4;
 }
 
 .now-card h3{
@@ -171,41 +96,73 @@ margin-bottom:6px;
 
 .now-card p{
 font-size:14px;
-color:var(--text-soft);
+color:#6B6560;
 }
 
-/* WORLD MAP */
+/* OCEAN MAP */
 
 .map-wrapper{
+border-radius:20px;
 overflow:hidden;
-border-radius:18px;
 border:1px solid rgba(0,0,0,.06);
-background:#eef3ea;
 cursor:grab;
+background:#b9d6e5;
 }
 
 .map{
+
 position:relative;
-height:480px;
-transform-origin:center;
-transition:transform .15s ease;
+height:520px;
+
+/* ocean grid */
+
+background:
+repeating-linear-gradient(
+0deg,
+rgba(255,255,255,.15),
+rgba(255,255,255,.15) 1px,
+transparent 1px,
+transparent 60px
+),
+
+repeating-linear-gradient(
+90deg,
+rgba(255,255,255,.15),
+rgba(255,255,255,.15) 1px,
+transparent 1px,
+transparent 60px
+);
+
+animation:oceanDrift 40s linear infinite;
+
 }
 
-.map-node{
+/* subtle wave motion */
+
+@keyframes oceanDrift{
+0%{background-position:0 0,0 0}
+100%{background-position:200px 120px,-200px -120px}
+}
+
+/* ISLAND MARKERS */
+
+.island{
 
 position:absolute;
+
 background:white;
+
+border-radius:999px;
 
 padding:10px 14px;
 
-border-radius:999px;
-border:1px solid rgba(0,0,0,.08);
+font-size:14px;
 
 display:flex;
 gap:6px;
 align-items:center;
 
-font-size:14px;
+border:1px solid rgba(0,0,0,.08);
 
 cursor:pointer;
 
@@ -213,14 +170,33 @@ transition:.25s;
 
 }
 
-.map-node:hover{
+.island:hover{
+
 transform:scale(1.1);
-box-shadow:0 6px 20px rgba(0,0,0,.15);
+
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+
 }
 
-.volta{top:55%;left:40%}
-.plotfirst{top:30%;left:65%}
-.arkhe{top:70%;left:60%}
+/* floating animation */
+
+.island{
+animation:float 6s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{transform:translateY(0)}
+50%{transform:translateY(-6px)}
+100%{transform:translateY(0)}
+
+}
+
+/* island positions */
+
+.volta{top:55%;left:42%}
+.plotfirst{top:25%;left:65%}
+.arkhe{top:72%;left:60%}
 .diadochi{top:40%;left:15%}
 
 /* PROJECTS */
@@ -232,7 +208,7 @@ gap:22px;
 }
 
 .project-card{
-background:var(--card);
+background:#F4F2EF;
 padding:28px;
 border-radius:14px;
 display:flex;
@@ -242,8 +218,8 @@ transition:.35s;
 }
 
 .project-card:hover{
-background:var(--green-soft);
 transform:translateY(-5px);
+background:#E8F0E4;
 }
 
 .project-title{
@@ -253,7 +229,7 @@ font-size:24px;
 
 .project-desc{
 font-size:14px;
-color:var(--text-soft);
+color:#6B6560;
 }
 
 .project-visual{
@@ -278,28 +254,6 @@ border-top:1px solid rgba(0,0,0,.06);
 background:#fff;
 }
 
-.project-link{
-margin-top:6px;
-color:var(--green);
-font-size:14px;
-font-weight:500;
-}
-
-/* FOOTER */
-
-footer{
-margin-top:60px;
-border-top:1px solid #eae7e3;
-padding:30px 28px;
-max-width:var(--max);
-margin-left:auto;
-margin-right:auto;
-display:flex;
-justify-content:space-between;
-font-size:12px;
-color:#888;
-}
-
 /* MOBILE */
 
 @media(max-width:900px){
@@ -315,12 +269,6 @@ color:#888;
 </head>
 
 <body>
-
-<nav>
-<div class="nav-inner">
-<strong>Mario R.</strong>
-</div>
-</nav>
 
 <header class="hero">
 
@@ -348,12 +296,12 @@ Software developer creating tools, worlds, and experiments.
 
 <div class="now-card">
 <h3>PlotFirst</h3>
-<p>Structured storytelling platform for writers and designers.</p>
+<p>Story design platform for writers and designers.</p>
 </div>
 
 <div class="now-card">
 <h3>Arkhe</h3>
-<p>Experimental sandbox for building tools and dev workflows.</p>
+<p>Experimental sandbox for building dev tools.</p>
 </div>
 
 </div>
@@ -362,19 +310,19 @@ Software developer creating tools, worlds, and experiments.
 
 <section>
 
-<div class="section-label">Project Worlds</div>
+<div class="section-label">Project Ocean</div>
 
 <div class="map-wrapper" id="mapWrapper">
 
 <div class="map" id="map">
 
-<div class="map-node volta" onclick="scrollToProject('volta')">🧭 Volta</div>
+<div class="island volta" onclick="scrollToProject('volta')">🧭 Volta</div>
 
-<div class="map-node plotfirst" onclick="scrollToProject('plotfirst')">✍️ PlotFirst</div>
+<div class="island plotfirst" onclick="scrollToProject('plotfirst')">✍️ PlotFirst</div>
 
-<div class="map-node arkhe" onclick="scrollToProject('arkhe')">🧪 Arkhe</div>
+<div class="island arkhe" onclick="scrollToProject('arkhe')">🧪 Arkhe</div>
 
-<div class="map-node diadochi" onclick="scrollToProject('diadochi')">⚔️ Diadochi</div>
+<div class="island diadochi" onclick="scrollToProject('diadochi')">⚔️ Diadochi</div>
 
 </div>
 
@@ -398,15 +346,13 @@ A writing tool turning rough ideas into structured stories.
 
 <div class="project-visual">
 
-<img src="./assets/plotfirst-volta-world.png" loading="lazy">
+<img src="./assets/plotfirst-volta-world.png">
 
 <div class="project-caption">
 World entry → structured story planning
 </div>
 
 </div>
-
-<a class="project-link" href="https://plotfirst.app" target="_blank">Visit ↗</a>
 
 </div>
 
@@ -415,20 +361,18 @@ World entry → structured story planning
 <h3 class="project-title">Arkhe</h3>
 
 <p class="project-desc">
-Sandbox for experimenting with dev tools and interaction systems.
+Sandbox for experimenting with dev tools.
 </p>
 
 <div class="project-visual">
 
-<img src="./assets/arkhe-code-snippets.png" loading="lazy">
+<img src="./assets/arkhe-code-snippets.png">
 
 <div class="project-caption">
 Fast, searchable code patterns
 </div>
 
 </div>
-
-<a class="project-link" href="https://arkhe.live" target="_blank">Visit ↗</a>
 
 </div>
 
@@ -447,7 +391,7 @@ Exploration game about restoring islands across an archipelago.
 <h3 class="project-title">Wars of the Diadochi</h3>
 
 <p class="project-desc">
-Historical narrative project exploring the successor wars after Alexander the Great.
+Historical narrative exploring Alexander's successor wars.
 </p>
 
 </div>
@@ -456,21 +400,9 @@ Historical narrative project exploring the successor wars after Alexander the Gr
 
 </section>
 
-<footer>
-
-<span>© Mario Ramirez 2026</span>
-
-<div>
-<a href="https://plotfirst.app">PlotFirst</a> |
-<a href="https://arkhe.live">Arkhe</a> |
-<a href="mailto:hyphysaurus@gmail.com">Email</a>
-</div>
-
-</footer>
-
 <script>
 
-/* SMOOTH SCROLL */
+/* SCROLL */
 
 function scrollToProject(id){
 
@@ -480,7 +412,7 @@ behavior:"smooth"
 
 }
 
-/* DRAG MAP */
+/* DRAG + ZOOM MAP */
 
 const map=document.getElementById("map")
 const wrapper=document.getElementById("mapWrapper")

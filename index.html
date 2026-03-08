@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,9 +14,13 @@
 
 <style>
 
-/* RESET */
+/* ---------------- RESET ---------------- */
 
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
 font-family:'DM Sans',sans-serif;
@@ -28,141 +30,159 @@ line-height:1.6;
 overflow-x:hidden;
 }
 
-/* HERO */
+/* ---------------- VARIABLES ---------------- */
+
+:root{
+
+--sage:#5A7A5A;
+--sage-soft:#E8F0E4;
+
+--card:#F4F2EF;
+
+--text-soft:#6B6560;
+
+--max:1080px;
+
+}
+
+/* ---------------- HERO ---------------- */
 
 .hero{
-max-width:1080px;
+
+padding:180px 20px 120px;
+text-align:center;
+
+}
+
+.hero-inner{
+
+max-width:720px;
 margin:auto;
-padding:160px 28px 80px;
+
+}
+
+.hero-name{
+
+font-family:'Instrument Serif',serif;
+font-size:22px;
+margin-bottom:36px;
+color:#6B6560;
+
 }
 
 .hero h1{
+
 font-family:'Instrument Serif',serif;
-font-size:64px;
-font-weight:400;
-line-height:1.1;
+
+font-size:clamp(42px,6vw,72px);
+
+line-height:1.05;
+
+letter-spacing:-0.03em;
+
+margin-bottom:26px;
+
 }
 
-.hero em{color:#5A7A5A}
+.hero em{
+color:var(--sage);
+font-style:italic;
+}
 
-.hero p{
-margin-top:20px;
+.hero-sub{
+
 font-size:18px;
-color:#6B6560;
-max-width:520px;
+color:var(--text-soft);
+margin-bottom:30px;
+
 }
 
-/* SECTIONS */
+.hero-now{
+
+font-size:14px;
+letter-spacing:0.05em;
+color:var(--sage);
+
+}
+
+/* ---------------- SECTIONS ---------------- */
 
 section{
-max-width:1080px;
+
+max-width:var(--max);
 margin:auto;
-padding:60px 28px;
+padding:70px 20px;
+
 }
 
 .section-label{
+
+text-align:center;
 font-size:12px;
 letter-spacing:.12em;
 text-transform:uppercase;
-color:#5A7A5A;
-margin-bottom:30px;
+color:var(--sage);
+margin-bottom:40px;
+
 }
 
-/* CURRENTLY BUILDING */
+/* ---------------- ATLAS ---------------- */
 
-.now-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
+.atlas-wrapper{
 
-.now-card{
-background:#F4F2EF;
-padding:24px;
-border-radius:12px;
-transition:.3s;
-}
-
-.now-card:hover{
-transform:translateY(-4px);
-background:#E8F0E4;
-}
-
-.now-card h3{
-font-family:'Instrument Serif',serif;
-font-size:22px;
-margin-bottom:6px;
-}
-
-.now-card p{
-font-size:14px;
-color:#6B6560;
-}
-
-/* OCEAN MAP */
-
-.map-wrapper{
-border-radius:20px;
-overflow:hidden;
+border-radius:18px;
 border:1px solid rgba(0,0,0,.06);
-cursor:grab;
-background:#b9d6e5;
-}
 
-.map{
-
-position:relative;
-height:520px;
-
-/* ocean grid */
+overflow:hidden;
 
 background:
+
 repeating-linear-gradient(
 0deg,
-rgba(255,255,255,.15),
-rgba(255,255,255,.15) 1px,
+rgba(0,0,0,.04),
+rgba(0,0,0,.04) 1px,
 transparent 1px,
 transparent 60px
 ),
 
 repeating-linear-gradient(
 90deg,
-rgba(255,255,255,.15),
-rgba(255,255,255,.15) 1px,
+rgba(0,0,0,.04),
+rgba(0,0,0,.04) 1px,
 transparent 1px,
 transparent 60px
 );
 
-animation:oceanDrift 40s linear infinite;
+}
+
+.atlas{
+
+position:relative;
+height:480px;
+
+cursor:grab;
 
 }
 
-/* subtle wave motion */
+/* ---------------- NODES ---------------- */
 
-@keyframes oceanDrift{
-0%{background-position:0 0,0 0}
-100%{background-position:200px 120px,-200px -120px}
-}
-
-/* ISLAND MARKERS */
-
-.island{
+.node{
 
 position:absolute;
 
 background:white;
 
+padding:12px 16px;
+
 border-radius:999px;
 
-padding:10px 14px;
+border:1px solid rgba(0,0,0,.08);
 
 font-size:14px;
 
 display:flex;
-gap:6px;
 align-items:center;
-
-border:1px solid rgba(0,0,0,.08);
+gap:6px;
 
 cursor:pointer;
 
@@ -170,97 +190,115 @@ transition:.25s;
 
 }
 
-.island:hover{
+.node:hover{
 
 transform:scale(1.1);
-
-box-shadow:0 10px 30px rgba(0,0,0,.15);
-
-}
-
-/* floating animation */
-
-.island{
-animation:float 6s ease-in-out infinite;
-}
-
-@keyframes float{
-
-0%{transform:translateY(0)}
-50%{transform:translateY(-6px)}
-100%{transform:translateY(0)}
+box-shadow:0 10px 28px rgba(0,0,0,.12);
 
 }
 
-/* island positions */
+/* node positions */
 
-.volta{top:55%;left:42%}
-.plotfirst{top:25%;left:65%}
-.arkhe{top:72%;left:60%}
-.diadochi{top:40%;left:15%}
+.mario{top:48%;left:45%}
 
-/* PROJECTS */
+.volta{top:60%;left:70%}
+
+.plotfirst{top:20%;left:65%}
+
+.arkhe{top:70%;left:20%}
+
+.diadochi{top:35%;left:10%}
+
+/* ---------------- CONNECTIONS ---------------- */
+
+.connections{
+
+position:absolute;
+width:100%;
+height:100%;
+pointer-events:none;
+
+}
+
+/* ---------------- HOVER CARD ---------------- */
+
+.preview{
+
+position:absolute;
+
+background:white;
+
+padding:16px;
+
+border-radius:10px;
+
+border:1px solid rgba(0,0,0,.1);
+
+width:200px;
+
+font-size:13px;
+
+box-shadow:0 8px 24px rgba(0,0,0,.12);
+
+display:none;
+
+}
+
+/* ---------------- PROJECTS ---------------- */
 
 .project-grid{
+
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:22px;
+gap:24px;
+
 }
 
 .project-card{
-background:#F4F2EF;
+
+background:var(--card);
+
 padding:28px;
+
 border-radius:14px;
-display:flex;
-flex-direction:column;
-gap:14px;
-transition:.35s;
+
+transition:.3s;
+
 }
 
 .project-card:hover{
+
 transform:translateY(-5px);
-background:#E8F0E4;
+background:var(--sage-soft);
+
 }
 
 .project-title{
+
 font-family:'Instrument Serif',serif;
 font-size:24px;
+margin-bottom:8px;
+
 }
 
 .project-desc{
+
 font-size:14px;
-color:#6B6560;
+color:var(--text-soft);
+
 }
 
-.project-visual{
-overflow:hidden;
-border-radius:12px;
-border:1px solid rgba(0,0,0,.08);
-}
-
-.project-visual img{
-transition:transform .4s ease;
-}
-
-.project-card:hover img{
-transform:scale(1.04);
-}
-
-.project-caption{
-font-size:12px;
-color:#777;
-padding:8px 10px;
-border-top:1px solid rgba(0,0,0,.06);
-background:#fff;
-}
-
-/* MOBILE */
+/* ---------------- MOBILE ---------------- */
 
 @media(max-width:900px){
 
-.project-grid{grid-template-columns:1fr}
-.now-grid{grid-template-columns:1fr}
-.hero h1{font-size:42px}
+.project-grid{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:42px;
+}
 
 }
 
@@ -272,57 +310,53 @@ background:#fff;
 
 <header class="hero">
 
+<div class="hero-inner">
+
+<div class="hero-name">Mario Ramirez</div>
+
 <h1>
 Building at the <em>intersection</em><br>
 of product & play
 </h1>
 
-<p>
+<p class="hero-sub">
 Software developer creating tools, worlds, and experiments.
 </p>
+
+<div class="hero-now">
+Volta • PlotFirst • Arkhe
+</div>
+
+</div>
 
 </header>
 
 <section>
 
-<div class="section-label">Currently Building</div>
+<div class="section-label">Project Atlas</div>
 
-<div class="now-grid">
+<div class="atlas-wrapper">
 
-<div class="now-card">
-<h3>Volta</h3>
-<p>Myth-inspired exploration game built in Godot.</p>
-</div>
+<div class="atlas" id="atlas">
 
-<div class="now-card">
-<h3>PlotFirst</h3>
-<p>Story design platform for writers and designers.</p>
-</div>
+<svg class="connections">
 
-<div class="now-card">
-<h3>Arkhe</h3>
-<p>Experimental sandbox for building dev tools.</p>
-</div>
+<line x1="50%" y1="50%" x2="70%" y2="60%" stroke="#cfd6cf" stroke-width="2"/>
+<line x1="50%" y1="50%" x2="65%" y2="20%" stroke="#cfd6cf" stroke-width="2"/>
+<line x1="50%" y1="50%" x2="20%" y2="70%" stroke="#cfd6cf" stroke-width="2"/>
+<line x1="50%" y1="50%" x2="10%" y2="35%" stroke="#cfd6cf" stroke-width="2"/>
 
-</div>
+</svg>
 
-</section>
+<div class="node mario">Mario</div>
 
-<section>
+<div class="node volta" onclick="scrollToProject('volta')">🧭 Volta</div>
 
-<div class="section-label">Project Ocean</div>
+<div class="node plotfirst" onclick="scrollToProject('plotfirst')">✍️ PlotFirst</div>
 
-<div class="map-wrapper" id="mapWrapper">
+<div class="node arkhe" onclick="scrollToProject('arkhe')">🧪 Arkhe</div>
 
-<div class="map" id="map">
-
-<div class="island volta" onclick="scrollToProject('volta')">🧭 Volta</div>
-
-<div class="island plotfirst" onclick="scrollToProject('plotfirst')">✍️ PlotFirst</div>
-
-<div class="island arkhe" onclick="scrollToProject('arkhe')">🧪 Arkhe</div>
-
-<div class="island diadochi" onclick="scrollToProject('diadochi')">⚔️ Diadochi</div>
+<div class="node diadochi" onclick="scrollToProject('diadochi')">⚔️ Diadochi</div>
 
 </div>
 
@@ -336,63 +370,43 @@ Software developer creating tools, worlds, and experiments.
 
 <div class="project-grid">
 
-<div class="project-card" id="plotfirst">
+<div class="project-card" id="volta">
 
-<h3 class="project-title">PlotFirst</h3>
+<div class="project-title">Volta do Mar</div>
 
-<p class="project-desc">
-A writing tool turning rough ideas into structured stories.
-</p>
-
-<div class="project-visual">
-
-<img src="./assets/plotfirst-volta-world.png">
-
-<div class="project-caption">
-World entry → structured story planning
+<div class="project-desc">
+Exploration game about restoring islands across an ocean archipelago.
 </div>
 
+</div>
+
+<div class="project-card" id="plotfirst">
+
+<div class="project-title">PlotFirst</div>
+
+<div class="project-desc">
+Narrative design platform helping writers structure story worlds.
 </div>
 
 </div>
 
 <div class="project-card" id="arkhe">
 
-<h3 class="project-title">Arkhe</h3>
+<div class="project-title">Arkhe</div>
 
-<p class="project-desc">
-Sandbox for experimenting with dev tools.
-</p>
-
-<div class="project-visual">
-
-<img src="./assets/arkhe-code-snippets.png">
-
-<div class="project-caption">
-Fast, searchable code patterns
+<div class="project-desc">
+Experimental sandbox for building dev tools and interaction ideas.
 </div>
-
-</div>
-
-</div>
-
-<div class="project-card" id="volta">
-
-<h3 class="project-title">Volta do Mar</h3>
-
-<p class="project-desc">
-Exploration game about restoring islands across an archipelago.
-</p>
 
 </div>
 
 <div class="project-card" id="diadochi">
 
-<h3 class="project-title">Wars of the Diadochi</h3>
+<div class="project-title">Wars of the Diadochi</div>
 
-<p class="project-desc">
-Historical narrative exploring Alexander's successor wars.
-</p>
+<div class="project-desc">
+Narrative project exploring the successor wars after Alexander the Great.
+</div>
 
 </div>
 
@@ -412,40 +426,47 @@ behavior:"smooth"
 
 }
 
-/* DRAG + ZOOM MAP */
+/* DRAG ATLAS */
 
-const map=document.getElementById("map")
-const wrapper=document.getElementById("mapWrapper")
+const atlas=document.getElementById("atlas")
 
-let scale=1
 let isDragging=false
+
 let startX,startY
+
 let offsetX=0,offsetY=0
 
-wrapper.addEventListener("mousedown",e=>{
+atlas.addEventListener("mousedown",e=>{
+
 isDragging=true
+
 startX=e.clientX-offsetX
 startY=e.clientY-offsetY
-wrapper.style.cursor="grabbing"
+
+atlas.style.cursor="grabbing"
+
 })
 
 window.addEventListener("mouseup",()=>{
+
 isDragging=false
-wrapper.style.cursor="grab"
+
+atlas.style.cursor="grab"
+
 })
 
 window.addEventListener("mousemove",e=>{
+
 if(!isDragging)return
+
 offsetX=e.clientX-startX
 offsetY=e.clientY-startY
-map.style.transform=`translate(${offsetX}px,${offsetY}px) scale(${scale})`
-})
 
-wrapper.addEventListener("wheel",e=>{
-e.preventDefault()
-scale+=e.deltaY*-0.001
-scale=Math.min(Math.max(.8,scale),2)
-map.style.transform=`translate(${offsetX}px,${offsetY}px) scale(${scale})`
+offsetX=Math.max(Math.min(offsetX,120),-120)
+offsetY=Math.max(Math.min(offsetY,80),-80)
+
+atlas.style.transform=`translate(${offsetX}px,${offsetY}px)`
+
 })
 
 </script>

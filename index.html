@@ -2,6 +2,7 @@
 
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,20 +15,15 @@
 
 <style>
 
-/* ---------------- RESET ---------------- */
+/* ---------------- BASE ---------------- */
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
 font-family:'DM Sans',sans-serif;
 background:#FAF9F7;
 color:#2A2A2A;
 line-height:1.6;
-overflow-x:hidden;
 }
 
 /* ---------------- VARIABLES ---------------- */
@@ -48,40 +44,28 @@ overflow-x:hidden;
 /* ---------------- HERO ---------------- */
 
 .hero{
-
 padding:180px 20px 120px;
 text-align:center;
-
 }
 
 .hero-inner{
-
-max-width:720px;
+max-width:760px;
 margin:auto;
-
 }
 
 .hero-name{
-
 font-family:'Instrument Serif',serif;
 font-size:22px;
-margin-bottom:36px;
 color:#6B6560;
-
+margin-bottom:36px;
 }
 
 .hero h1{
-
 font-family:'Instrument Serif',serif;
-
-font-size:clamp(42px,6vw,72px);
-
+font-size:clamp(44px,6vw,72px);
 line-height:1.05;
-
 letter-spacing:-0.03em;
-
-margin-bottom:26px;
-
+margin-bottom:28px;
 }
 
 .hero em{
@@ -90,78 +74,85 @@ font-style:italic;
 }
 
 .hero-sub{
-
 font-size:18px;
 color:var(--text-soft);
-margin-bottom:30px;
-
+margin-bottom:26px;
 }
 
 .hero-now{
-
 font-size:14px;
 letter-spacing:0.05em;
 color:var(--sage);
-
 }
 
 /* ---------------- SECTIONS ---------------- */
 
 section{
-
 max-width:var(--max);
 margin:auto;
 padding:70px 20px;
-
 }
 
 .section-label{
-
 text-align:center;
 font-size:12px;
 letter-spacing:.12em;
 text-transform:uppercase;
 color:var(--sage);
 margin-bottom:40px;
-
 }
 
 /* ---------------- ATLAS ---------------- */
 
-.atlas-wrapper{
-
-border-radius:18px;
-border:1px solid rgba(0,0,0,.06);
-
-overflow:hidden;
+.atlas-container{
 
 background:
 
 repeating-linear-gradient(
 0deg,
-rgba(0,0,0,.04),
-rgba(0,0,0,.04) 1px,
+rgba(0,0,0,0.03),
+rgba(0,0,0,0.03) 1px,
 transparent 1px,
 transparent 60px
 ),
 
 repeating-linear-gradient(
 90deg,
-rgba(0,0,0,.04),
-rgba(0,0,0,.04) 1px,
+rgba(0,0,0,0.03),
+rgba(0,0,0,0.03) 1px,
 transparent 1px,
 transparent 60px
 );
 
+border-radius:18px;
+border:1px solid rgba(0,0,0,0.06);
+
+overflow:hidden;
+
 }
 
 .atlas{
-
 position:relative;
-height:480px;
-
+height:440px;
 cursor:grab;
+}
 
+/* ---------------- ROUTE LINES ---------------- */
+
+.route{
+stroke:#9DB59D;
+stroke-width:2;
+fill:none;
+
+stroke-dasharray:8 8;
+animation:routeMove 12s linear infinite;
+
+}
+
+@keyframes routeMove{
+to{
+stroke-dashoffset:-100;
+}
 }
 
 /* ---------------- NODES ---------------- */
@@ -172,19 +163,17 @@ position:absolute;
 
 background:white;
 
-padding:12px 16px;
+padding:14px 18px;
 
-border-radius:999px;
+border-radius:12px;
 
-border:1px solid rgba(0,0,0,.08);
+border:1px solid rgba(0,0,0,0.08);
 
 font-size:14px;
 
 display:flex;
 align-items:center;
-gap:6px;
-
-cursor:pointer;
+gap:8px;
 
 transition:.25s;
 
@@ -192,35 +181,42 @@ transition:.25s;
 
 .node:hover{
 
-transform:scale(1.1);
-box-shadow:0 10px 28px rgba(0,0,0,.12);
+transform:translateY(-4px);
+
+box-shadow:0 14px 32px rgba(90,122,90,0.25);
+
+}
+
+/* center node */
+
+.node-center{
+
+width:64px;
+height:64px;
+
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-family:'Instrument Serif',serif;
 
 }
 
 /* node positions */
 
-.mario{top:48%;left:45%}
+.mario{top:50%;left:50%;transform:translate(-50%,-50%)}
 
-.volta{top:60%;left:70%}
+.volta{top:62%;left:72%}
 
-.plotfirst{top:20%;left:65%}
+.plotfirst{top:20%;left:66%}
 
-.arkhe{top:70%;left:20%}
+.arkhe{top:70%;left:22%}
 
-.diadochi{top:35%;left:10%}
+.diadochi{top:36%;left:14%}
 
-/* ---------------- CONNECTIONS ---------------- */
-
-.connections{
-
-position:absolute;
-width:100%;
-height:100%;
-pointer-events:none;
-
-}
-
-/* ---------------- HOVER CARD ---------------- */
+/* ---------------- PREVIEW CARDS ---------------- */
 
 .preview{
 
@@ -232,17 +228,40 @@ padding:16px;
 
 border-radius:10px;
 
-border:1px solid rgba(0,0,0,.1);
+border:1px solid rgba(0,0,0,0.08);
 
 width:200px;
 
 font-size:13px;
 
-box-shadow:0 8px 24px rgba(0,0,0,.12);
+box-shadow:0 10px 26px rgba(0,0,0,0.15);
 
-display:none;
+opacity:0;
+pointer-events:none;
+
+transform:translateY(10px);
+
+transition:.25s;
 
 }
+
+.node:hover + .preview{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+/* preview positions */
+
+.p-volta{top:58%;left:78%}
+
+.p-plotfirst{top:14%;left:72%}
+
+.p-arkhe{top:76%;left:28%}
+
+.p-diadochi{top:30%;left:20%}
 
 /* ---------------- PROJECTS ---------------- */
 
@@ -268,8 +287,8 @@ transition:.3s;
 
 .project-card:hover{
 
-transform:translateY(-5px);
 background:var(--sage-soft);
+transform:translateY(-6px);
 
 }
 
@@ -335,28 +354,44 @@ Volta • PlotFirst • Arkhe
 
 <div class="section-label">Project Atlas</div>
 
-<div class="atlas-wrapper">
+<div class="atlas-container">
 
 <div class="atlas" id="atlas">
 
 <svg class="connections">
 
-<line x1="50%" y1="50%" x2="70%" y2="60%" stroke="#cfd6cf" stroke-width="2"/>
-<line x1="50%" y1="50%" x2="65%" y2="20%" stroke="#cfd6cf" stroke-width="2"/>
-<line x1="50%" y1="50%" x2="20%" y2="70%" stroke="#cfd6cf" stroke-width="2"/>
-<line x1="50%" y1="50%" x2="10%" y2="35%" stroke="#cfd6cf" stroke-width="2"/>
+<path class="route" d="M540 220 Q640 120 740 120"/>
+<path class="route" d="M540 220 Q640 300 740 300"/>
+<path class="route" d="M540 220 Q420 320 300 340"/>
+<path class="route" d="M540 220 Q420 120 300 160"/>
 
 </svg>
 
-<div class="node mario">Mario</div>
+<div class="node node-center mario">Mario</div>
 
 <div class="node volta" onclick="scrollToProject('volta')">🧭 Volta</div>
+<div class="preview p-volta">
+<b>Volta do Mar</b><br>
+Exploration game built in Godot.
+</div>
 
 <div class="node plotfirst" onclick="scrollToProject('plotfirst')">✍️ PlotFirst</div>
+<div class="preview p-plotfirst">
+<b>PlotFirst</b><br>
+Narrative design platform.
+</div>
 
 <div class="node arkhe" onclick="scrollToProject('arkhe')">🧪 Arkhe</div>
+<div class="preview p-arkhe">
+<b>Arkhe</b><br>
+Experimental dev sandbox.
+</div>
 
 <div class="node diadochi" onclick="scrollToProject('diadochi')">⚔️ Diadochi</div>
+<div class="preview p-diadochi">
+<b>Wars of the Diadochi</b><br>
+Historical narrative project.
+</div>
 
 </div>
 
@@ -371,43 +406,31 @@ Volta • PlotFirst • Arkhe
 <div class="project-grid">
 
 <div class="project-card" id="volta">
-
 <div class="project-title">Volta do Mar</div>
-
 <div class="project-desc">
 Exploration game about restoring islands across an ocean archipelago.
 </div>
-
 </div>
 
 <div class="project-card" id="plotfirst">
-
 <div class="project-title">PlotFirst</div>
-
 <div class="project-desc">
 Narrative design platform helping writers structure story worlds.
 </div>
-
 </div>
 
 <div class="project-card" id="arkhe">
-
 <div class="project-title">Arkhe</div>
-
 <div class="project-desc">
 Experimental sandbox for building dev tools and interaction ideas.
 </div>
-
 </div>
 
 <div class="project-card" id="diadochi">
-
 <div class="project-title">Wars of the Diadochi</div>
-
 <div class="project-desc">
 Narrative project exploring the successor wars after Alexander the Great.
 </div>
-
 </div>
 
 </div>
@@ -416,7 +439,7 @@ Narrative project exploring the successor wars after Alexander the Great.
 
 <script>
 
-/* SCROLL */
+/* scroll to project */
 
 function scrollToProject(id){
 
@@ -426,19 +449,18 @@ behavior:"smooth"
 
 }
 
-/* DRAG ATLAS */
+/* atlas drag */
 
 const atlas=document.getElementById("atlas")
 
-let isDragging=false
-
 let startX,startY
-
-let offsetX=0,offsetY=0
+let offsetX=0
+let offsetY=0
+let dragging=false
 
 atlas.addEventListener("mousedown",e=>{
 
-isDragging=true
+dragging=true
 
 startX=e.clientX-offsetX
 startY=e.clientY-offsetY
@@ -449,21 +471,20 @@ atlas.style.cursor="grabbing"
 
 window.addEventListener("mouseup",()=>{
 
-isDragging=false
-
+dragging=false
 atlas.style.cursor="grab"
 
 })
 
 window.addEventListener("mousemove",e=>{
 
-if(!isDragging)return
+if(!dragging)return
 
 offsetX=e.clientX-startX
 offsetY=e.clientY-startY
 
-offsetX=Math.max(Math.min(offsetX,120),-120)
-offsetY=Math.max(Math.min(offsetY,80),-80)
+offsetX=Math.max(Math.min(offsetX,80),-80)
+offsetY=Math.max(Math.min(offsetY,60),-60)
 
 atlas.style.transform=`translate(${offsetX}px,${offsetY}px)`
 
@@ -472,5 +493,4 @@ atlas.style.transform=`translate(${offsetX}px,${offsetY}px)`
 </script>
 
 </body>
-
 </html>

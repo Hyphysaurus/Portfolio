@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,6 +18,8 @@ content="Software developer building playful, human-centered tools across game d
 
 <style>
 
+/* RESET */
+
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
@@ -24,6 +27,44 @@ font-family:'DM Sans',sans-serif;
 background:#FAF9F7;
 color:#2A2A2A;
 line-height:1.6;
+overflow-x:hidden;
+}
+
+/* TOPOGRAPHIC BACKGROUND */
+
+body::before{
+
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+
+background-image:
+radial-gradient(circle at 20% 30%, rgba(90,122,90,.06) 0%, transparent 40%),
+radial-gradient(circle at 80% 60%, rgba(90,122,90,.05) 0%, transparent 45%),
+repeating-linear-gradient(
+0deg,
+rgba(138,133,128,.06),
+rgba(138,133,128,.06) 1px,
+transparent 1px,
+transparent 14px
+);
+
+background-size:120% 120%;
+
+animation:topoDrift 90s linear infinite;
+
+opacity:.35;
+z-index:-1;
+
+}
+
+@keyframes topoDrift{
+
+0%{transform:translate(0,0)}
+50%{transform:translate(-40px,-20px)}
+100%{transform:translate(0,0)}
+
 }
 
 img{
@@ -33,14 +74,19 @@ border-radius:12px;
 }
 
 :root{
+
 --green:#5A7A5A;
 --green-soft:#E8F0E4;
 --card:#F4F2EF;
 --text-soft:#6B6560;
 --max:1080px;
+
 }
 
+/* NAV */
+
 nav{
+
 position:fixed;
 top:0;
 width:100%;
@@ -49,154 +95,248 @@ background:rgba(250,249,247,.9);
 backdrop-filter:blur(12px);
 border-bottom:1px solid #eae7e3;
 z-index:100;
+
 }
 
 .nav-inner{
+
 max-width:var(--max);
 margin:auto;
 height:100%;
+
 display:flex;
 align-items:center;
 justify-content:space-between;
+
 padding:0 28px;
+
 }
 
+/* HERO */
+
 .hero{
+
 max-width:var(--max);
 margin:auto;
+
 padding:160px 28px 80px;
+
 }
 
 .hero h1{
+
 font-family:'Instrument Serif',serif;
 font-size:64px;
 font-weight:400;
 line-height:1.1;
+
 }
 
-.hero em{color:var(--green)}
+.hero em{
+color:var(--green);
+font-style:italic;
+}
 
 .hero p{
+
 margin-top:24px;
 font-size:18px;
 color:var(--text-soft);
 max-width:520px;
+
 }
 
+/* SECTIONS */
+
 section{
+
 max-width:var(--max);
 margin:auto;
 padding:60px 28px;
+
 }
 
 .section-label{
+
 font-size:12px;
 letter-spacing:.12em;
 text-transform:uppercase;
 color:var(--green);
 margin-bottom:30px;
+
 }
 
+/* CURRENTLY BUILDING */
+
+.now-grid{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+
+}
+
+.now-card{
+
+background:var(--card);
+padding:24px;
+border-radius:12px;
+
+transition:.3s;
+
+}
+
+.now-card:hover{
+
+background:var(--green-soft);
+transform:translateY(-4px);
+
+}
+
+.now-card h3{
+
+font-family:'Instrument Serif',serif;
+font-size:22px;
+margin-bottom:6px;
+
+}
+
+.now-card p{
+
+font-size:14px;
+color:var(--text-soft);
+
+}
+
+/* PROJECTS */
+
 .project-grid{
+
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:22px;
+
 }
 
-.project-card {
-  background: var(--card-bg);
-  border-radius: 14px;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.project-card{
 
-  border: 1px solid rgba(0,0,0,0.04);
+background:var(--card);
 
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease,
-    border-color 0.35s ease,
-    background 0.35s ease;
+padding:28px;
 
-  position: relative;
+border-radius:14px;
+
+display:flex;
+flex-direction:column;
+gap:14px;
+
+transition:.35s;
+
 }
 
-.project-card:hover {
+.project-card:hover{
 
-  transform: translateY(-6px);
+background:var(--green-soft);
+transform:translateY(-5px);
 
-  background: var(--green-hover);
-
-  border-color: rgba(90,122,90,0.25);
-
-  box-shadow:
-    0 12px 40px rgba(90,122,90,0.12),
-    0 2px 8px rgba(0,0,0,0.04);
 }
 
 .project-title{
+
 font-family:'Instrument Serif',serif;
 font-size:24px;
-letter-spacing: -0.02em;
+
 }
 
 .project-desc{
+
 font-size:14px;
 color:var(--text-soft);
+
 }
 
-.project-visual img {
-  width: 100%;
-  height: auto;
-  display: block;
+.project-visual{
 
-  transition: transform 0.45s ease;
+overflow:hidden;
+border-radius:12px;
+border:1px solid rgba(0,0,0,.08);
+
 }
 
-.project-card:hover .project-visual img {
-  transform: scale(1.03);
+.project-visual img{
+
+transition:transform .4s ease;
+
+}
+
+.project-card:hover img{
+
+transform:scale(1.04);
+
 }
 
 .project-caption{
+
 font-size:12px;
 color:#777;
 padding:8px 10px;
 border-top:1px solid rgba(0,0,0,.06);
 background:#fff;
+
 }
 
 .project-link{
+
 margin-top:6px;
 color:var(--green);
 font-size:14px;
 font-weight:500;
+
 }
 
+/* FOOTER */
+
 footer{
+
 margin-top:60px;
 border-top:1px solid #eae7e3;
+
 padding:30px 28px;
+
 max-width:var(--max);
 margin-left:auto;
 margin-right:auto;
+
 display:flex;
 justify-content:space-between;
+
 font-size:12px;
 color:#888;
+
 }
 
+/* MOBILE */
+
 @media(max-width:900px){
+
 .project-grid{
 grid-template-columns:1fr;
 }
-.hero h1{
-font-size:44px;
+
+.now-grid{
+grid-template-columns:1fr;
 }
+
+.hero h1{
+font-size:42px;
+}
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
@@ -225,6 +365,50 @@ human-centered tools, games, and stories.
 </header>
 
 
+<section>
+
+<div class="section-label">Currently Building</div>
+
+<div class="now-grid">
+
+<div class="now-card">
+
+<h3>Volta</h3>
+
+<p>
+A myth-inspired exploration game built in Godot.
+Currently developing traversal mechanics and a vertical slice island.
+</p>
+
+</div>
+
+<div class="now-card">
+
+<h3>PlotFirst</h3>
+
+<p>
+A storytelling platform helping writers and designers
+turn ideas into structured narrative worlds.
+</p>
+
+</div>
+
+<div class="now-card">
+
+<h3>Arkhe</h3>
+
+<p>
+An experimental sandbox for building and testing tools,
+interaction patterns, and developer workflows.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
 <section id="projects">
 
 <div class="section-label">Selected Projects</div>
@@ -238,8 +422,7 @@ human-centered tools, games, and stories.
 <h3 class="project-title">PlotFirst</h3>
 
 <p class="project-desc">
-A writing and planning tool that turns rough ideas into structured
-stories. Built end-to-end: product, design, and implementation.
+A writing and planning tool turning rough ideas into structured stories.
 </p>
 
 <div class="project-visual">
@@ -251,13 +434,17 @@ loading="lazy"
 decoding="async">
 
 <div class="project-caption">
+
 World entry → structured story planning
+
 </div>
 
 </div>
 
 <a class="project-link" href="https://plotfirst.app" target="_blank">
+
 Visit ↗
+
 </a>
 
 </div>
@@ -270,8 +457,7 @@ Visit ↗
 <h3 class="project-title">Arkhe</h3>
 
 <p class="project-desc">
-A live sandbox for experimentation and tool building in public —
-a space to prototype interaction patterns and dev utilities.
+A live sandbox for experimenting with dev tools and interaction systems.
 </p>
 
 <div class="project-visual">
@@ -283,13 +469,17 @@ loading="lazy"
 decoding="async">
 
 <div class="project-caption">
+
 Fast, searchable code patterns
+
 </div>
 
 </div>
 
 <a class="project-link" href="https://arkhe.live" target="_blank">
+
 Visit ↗
+
 </a>
 
 </div>
@@ -302,8 +492,8 @@ Visit ↗
 <h3 class="project-title">Volta do Mar</h3>
 
 <p class="project-desc">
-An exploration game about ecological restoration across an ocean
-archipelago. Built in Godot with fog clearing and wind traversal.
+An exploration game about ecological restoration across an ocean archipelago.
+Built in Godot.
 </p>
 
 </div>
@@ -316,8 +506,7 @@ archipelago. Built in Godot with fog clearing and wind traversal.
 <h3 class="project-title">Wars of the Diadochi</h3>
 
 <p class="project-desc">
-Narrative writing exploring the successor wars after Alexander
-the Great — where ambition and history collide.
+A historical narrative project exploring the wars after Alexander the Great.
 </p>
 
 </div>
@@ -332,27 +521,16 @@ the Great — where ambition and history collide.
 <span>© Mario Ramirez 2026</span>
 
 <div>
+
 <a href="https://plotfirst.app">PlotFirst</a> |
 <a href="https://arkhe.live">Arkhe</a> |
 <a href="mailto:hyphysaurus@gmail.com">Email</a>
+
 </div>
 
 </footer>
 
 
-<script>
-
-const nav=document.querySelector("nav")
-
-window.addEventListener("scroll",()=>{
-if(window.scrollY>30){
-nav.style.boxShadow="0 4px 18px rgba(0,0,0,.04)"
-}else{
-nav.style.boxShadow="none"
-}
-})
-
-</script>
-
 </body>
+
 </html>

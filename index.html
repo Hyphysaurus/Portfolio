@@ -1,577 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mario Ramirez — Portfolio</title>
-  <meta name="description" content="Software developer building playful, human-centered tools across game dev, SaaS, and creative spaces." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com/" />
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<title>Mario Ramirez — Portfolio</title>
 
-  <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-    body {
-      font-family: 'DM Sans', -apple-system, sans-serif;
-      background: #FAF9F7;
-      color: #2A2A2A;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-    }
-    ::selection { background: #c1dbb3; color: #2a2a2a; }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
+<meta name="description"
+content="Software developer building playful, human-centered tools across game dev, SaaS, and creative spaces.">
 
-    /* ── CSS Variables ── */
-    :root {
-      --bg: #FAF9F7;
-      --text: #2A2A2A;
-      --text-soft: #6B6560;
-      --text-muted: #8A8580;
-      --green: #5A7A5A;
-      --green-light: #C5D8C0;
-      --green-hover: #E8F0E4;
-      --green-chip: #E4EDDF;
-      --green-border: #8AAD8A;
-      --green-divider: #B5CCB0;
-      --card-bg: #F4F2EF;
-      --max-w: 1080px;
-      --px: 32px;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes drawLine {
-      from { transform: scaleX(0); }
-      to { transform: scaleX(1); }
-    }
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
-    /* ── Navigation ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 64px;
-      display: flex; align-items: center;
-      transition: all 0.35s ease;
-      background: transparent;
-    }
-    nav.scrolled {
-      background: rgba(250,249,247,0.92);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid #e8e5e0;
-    }
-    .nav-inner {
-      width: 100%; max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--px);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .nav-logo {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-size: 20px; font-weight: 400;
-      cursor: pointer; letter-spacing: -0.01em;
-    }
-    .nav-links { display: flex; align-items: center; gap: 28px; }
-    .nav-links a {
-      font-size: 13px; font-weight: 400; color: var(--text-muted);
-      letter-spacing: 0.03em; transition: color 0.25s;
-    }
-    .nav-links a:hover { color: var(--green); }
-    .nav-contact {
-      font-size: 13px; font-weight: 500;
-      color: var(--text);
-      padding: 7px 18px;
-      border: 1px solid var(--green-border);
-      border-radius: 24px;
-      transition: all 0.25s;
-    }
-    .nav-contact:hover {
-      background: var(--green);
-      color: #fff;
-      border-color: var(--green);
-    }
+<style>
 
-    /* ── Hero ── */
-    .hero {
-      padding: 160px var(--px) 72px;
-      max-width: var(--max-w); margin: 0 auto;
-    }
-    .hero h1 {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-size: clamp(42px, 6.5vw, 76px);
-      font-weight: 400; line-height: 1.06;
-      letter-spacing: -0.03em;
-    }
-    .hero h1 span { display: block; animation: fadeUp 0.8s ease forwards; opacity: 0; }
-    .hero h1 span:nth-child(1) { animation-delay: 0.1s; }
-    .hero h1 span:nth-child(2) { animation-delay: 0.25s; }
-    .hero h1 span:nth-child(3) { animation-delay: 0.4s; }
-    .hero h1 em { font-style: italic; color: var(--green); }
-    .hero-sub {
-      margin-top: 28px; max-width: 520px;
-      font-size: 17px; font-weight: 300; line-height: 1.7;
-      color: var(--text-soft);
-      animation: fadeUp 0.8s ease 0.55s forwards; opacity: 0;
-    }
-    .hero-divider {
-      margin-top: 56px; height: 1px;
-      background: var(--green-divider);
-      transform-origin: left;
-      animation: drawLine 0.9s ease 0.7s forwards;
-      transform: scaleX(0);
-    }
+*{margin:0;padding:0;box-sizing:border-box}
 
-    /* ── Sections ── */
-    section { padding: 64px var(--px); max-width: var(--max-w); margin: 0 auto; }
-    .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
-    .section-label span {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--green);
-      white-space: nowrap;
-    }
-    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--green-light); }
+body{
+font-family:'DM Sans',sans-serif;
+background:#FAF9F7;
+color:#2A2A2A;
+line-height:1.6;
+}
 
-    /* ── Timeline ── */
-    .timeline-item {
-      display: grid; grid-template-columns: 170px 1fr; gap: 28px;
-      padding: 26px 0;
-      border-bottom: 1px solid #eae7e3;
-    }
-    .timeline-item:last-child { border-bottom: none; }
-    .time-period { font-size: 13px; color: var(--text-muted); letter-spacing: 0.02em; padding-top: 4px; }
-    .time-title {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-size: 22px; font-weight: 400; margin-bottom: 6px;
-      letter-spacing: -0.01em;
-    }
-    .time-desc { font-size: 15px; font-weight: 300; line-height: 1.65; color: var(--text-soft); }
+img{
+display:block;
+width:100%;
+border-radius:12px;
+}
 
-    /* ── Education ── */
-    .edu { margin-top: 56px; }
-    .edu-degree {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-size: 22px; display: block; margin-bottom: 4px;
-    }
-    .edu-school { font-size: 15px; font-weight: 300; color: var(--text-soft); }
+:root{
+--green:#5A7A5A;
+--green-soft:#E8F0E4;
+--card:#F4F2EF;
+--text-soft:#6B6560;
+--max:1080px;
+}
 
-    /* ── Projects Grid ── */
-    .projects-intro {
-      font-size: 17px; font-weight: 300; line-height: 1.7;
-      color: var(--text-soft); max-width: 560px;
-      margin: -12px 0 44px;
-    }
-    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .project-card {
-      background: var(--card-bg);
-      border-radius: 14px; padding: 30px;
-      display: flex; flex-direction: column; gap: 16px;
-      transition: all 0.35s ease;
-      cursor: default; position: relative;
-    }
-    .project-card:hover {
-      background: var(--green-hover);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(90,122,90,0.08);
-    }
-    .project-top { display: flex; justify-content: space-between; align-items: center; }
-    .project-index { font-size: 12px; font-weight: 500; color: #b5afa8; letter-spacing: 0.05em; }
-    .project-emoji { font-size: 20px; }
-    .project-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-    .project-title {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-size: 24px; font-weight: 400; letter-spacing: -0.01em;
-    }
-    .project-tag {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.07em;
-      text-transform: uppercase; color: var(--text-muted);
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .project-desc { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--text-soft); flex: 1; }
-    .project-link {
-      font-size: 13px; font-weight: 500; color: var(--green);
-      border-bottom: 1px solid var(--green);
-      align-self: flex-start; padding-bottom: 1px;
-      transition: opacity 0.2s;
-    }
-    .project-link:hover { opacity: 0.7; }
+nav{
+position:fixed;
+top:0;
+width:100%;
+height:64px;
+background:rgba(250,249,247,.9);
+backdrop-filter:blur(12px);
+border-bottom:1px solid #eae7e3;
+z-index:100;
+}
 
-    /* ── Project Visuals ── */
-    .project-visual {
-      margin-top: 8px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(138,133,128,0.22);
-      background: #fff;
-    }
-    .project-visual img { width: 100%; height: auto; display: block; }
-    .project-visual-caption {
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--text-muted);
-      padding: 10px 12px;
-      border-top: 1px solid rgba(138,133,128,0.16);
-      background: rgba(244,242,239,0.55);
-    }
+.nav-inner{
+max-width:var(--max);
+margin:auto;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 28px;
+}
 
-    /* ── Tools ── */
-    .tools-grid { display: flex; flex-direction: column; gap: 32px; }
-    .tool-group-label { font-size: 13px; font-weight: 500; color: var(--text-soft); margin-bottom: 10px; letter-spacing: 0.02em; }
-    .tool-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tool-chip {
-      font-size: 13px; color: #3a3530;
-      background: var(--green-chip);
-      padding: 7px 16px; border-radius: 20px;
-      transition: all 0.2s;
-    }
-    .tool-chip:hover { background: var(--green-light); }
+.hero{
+max-width:var(--max);
+margin:auto;
+padding:160px 28px 80px;
+}
 
-    /* ── About ── */
-    .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; }
-    .about-text p { font-size: 17px; font-weight: 300; line-height: 1.75; color: #3a3530; margin-bottom: 20px; }
-    .about-text p:last-child { margin-bottom: 0; }
-    .about-meta { display: flex; flex-direction: column; gap: 24px; padding-top: 2px; }
-    .meta-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
-    .meta-value { font-size: 15px; color: #3a3530; line-height: 1.5; }
-    .meta-value a {
-      color: var(--green);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: var(--green-light);
-      transition: text-decoration-color 0.2s;
-    }
-    .meta-value a:hover { text-decoration-color: var(--green); }
+.hero h1{
+font-family:'Instrument Serif',serif;
+font-size:64px;
+font-weight:400;
+line-height:1.1;
+}
 
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--green-light);
-      margin-top: 32px; padding: 28px var(--px);
-      max-width: var(--max-w); margin-left: auto; margin-right: auto;
-    }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; }
-    .footer-text { font-size: 12px; color: var(--text-muted); }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a { font-size: 12px; color: var(--text-muted); transition: color 0.2s; }
-    .footer-links a:hover { color: var(--green); }
+.hero em{color:var(--green)}
 
-    /* ── Responsive ── */
-    @media (max-width: 860px) {
-      :root { --px: 24px; }
-      .hero { padding-top: 120px; }
-      .timeline-item { grid-template-columns: 1fr; gap: 4px; }
-      .time-period { padding-top: 0; font-size: 12px; }
-      .project-grid { grid-template-columns: 1fr; }
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .nav-links a:not(.nav-contact) { display: none; }
-    }
-    @media (max-width: 520px) {
-      :root { --px: 18px; }
-      .hero { padding-top: 100px; padding-bottom: 48px; }
-      .hero h1 { font-size: 36px; }
-      .hero-sub { font-size: 15px; }
-      section { padding: 48px var(--px); }
-      .project-card { padding: 22px; }
-    }
-  </style>
+.hero p{
+margin-top:24px;
+font-size:18px;
+color:var(--text-soft);
+max-width:520px;
+}
+
+section{
+max-width:var(--max);
+margin:auto;
+padding:60px 28px;
+}
+
+.section-label{
+font-size:12px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--green);
+margin-bottom:30px;
+}
+
+.project-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:22px;
+}
+
+.project-card{
+background:var(--card);
+padding:30px;
+border-radius:14px;
+transition:.3s;
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+.project-card:hover{
+background:var(--green-soft);
+transform:translateY(-3px);
+}
+
+.project-title{
+font-family:'Instrument Serif',serif;
+font-size:24px;
+}
+
+.project-desc{
+font-size:14px;
+color:var(--text-soft);
+}
+
+.project-visual{
+margin-top:10px;
+overflow:hidden;
+border-radius:12px;
+border:1px solid rgba(0,0,0,.08);
+}
+
+.project-caption{
+font-size:12px;
+color:#777;
+padding:8px 10px;
+border-top:1px solid rgba(0,0,0,.06);
+background:#fff;
+}
+
+.project-link{
+margin-top:6px;
+color:var(--green);
+font-size:14px;
+font-weight:500;
+}
+
+footer{
+margin-top:60px;
+border-top:1px solid #eae7e3;
+padding:30px 28px;
+max-width:var(--max);
+margin-left:auto;
+margin-right:auto;
+display:flex;
+justify-content:space-between;
+font-size:12px;
+color:#888;
+}
+
+@media(max-width:900px){
+.project-grid{
+grid-template-columns:1fr;
+}
+.hero h1{
+font-size:44px;
+}
+}
+
+</style>
 </head>
 
 <body>
-  <!-- ── Nav ── -->
-  <nav id="nav">
-    <div class="nav-inner">
-      <span class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">Mario R.</span>
-      <div class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#projects">Projects</a>
-        <a href="#tools">Tools</a>
-        <a href="#about">About</a>
-        <a href="mailto:hyphysaurus@gmail.com" class="nav-contact">Contact</a>
-      </div>
-    </div>
-  </nav>
 
-  <!-- ── Hero ── -->
-  <header class="hero">
-    <h1>
-      <span>Building at the</span>
-      <span><em>intersection</em> of</span>
-      <span>product & play</span>
-    </h1>
-    <p class="hero-sub">
-      Software developer with a background in education, now creating
-      human‑centered tools, games, and stories.
-    </p>
-    <div class="hero-divider"></div>
-  </header>
+<nav>
+<div class="nav-inner">
+<strong>Mario R.</strong>
+<div>
+<a href="#projects">Projects</a>
+</div>
+</div>
+</nav>
 
-  <!-- ── Work ── -->
-  <section id="work">
-    <div class="section-label fade-up"><span>Background</span></div>
 
-    <div class="fade-up">
-      <div class="timeline-item">
-        <span class="time-period">2024 — Present</span>
-        <div>
-          <h3 class="time-title">Independent Software Developer</h3>
-          <p class="time-desc">
-            Building PlotFirst, Arkhe, and Volta do Mar — products spanning SaaS, creative tooling, and game development.
-            Shipping end-to-end: product vision, design, engineering.
-          </p>
-        </div>
-      </div>
+<header class="hero">
 
-      <div class="timeline-item">
-        <span class="time-period">2017 — 2024</span>
-        <div>
-          <h3 class="time-title">Educator</h3>
-          <p class="time-desc">
-            7+ years working directly with people — developing curriculum, leading teams, and building systems for learning.
-            ServSafe certified. This is where the product instinct started.
-          </p>
-        </div>
-      </div>
+<h1>
+Building at the <em>intersection</em><br>
+of product & play
+</h1>
 
-      <div class="timeline-item">
-        <span class="time-period">Previously</span>
-        <div>
-          <h3 class="time-title">Shift Lead — Five Guys</h3>
-          <p class="time-desc">Team leadership, operations, quality standards. Fast environments, real accountability.</p>
-        </div>
-      </div>
-    </div>
+<p>
+Software developer with a background in education, now creating
+human-centered tools, games, and stories.
+</p>
 
-    <div class="edu fade-up">
-      <div class="section-label"><span>Education</span></div>
-      <span class="edu-degree">B.A., International Relations</span>
-      <span class="edu-school">University of California, Davis</span>
-    </div>
-  </section>
+</header>
 
-  <!-- ── Projects ── -->
-  <section id="projects">
-    <div class="section-label fade-up"><span>Selected Projects</span></div>
-    <p class="projects-intro fade-up">
-      The through-line: building things that feel alive — tools for
-      storytelling, spaces for experimentation, worlds worth exploring.
-    </p>
 
-    <div class="project-grid">
-      <!-- PlotFirst -->
-      <div class="project-card fade-up">
-        <div class="project-top">
-          <span class="project-index">01</span>
-          <span class="project-emoji">✍️</span>
-        </div>
-        <div class="project-header">
-          <h3 class="project-title">PlotFirst</h3>
-          <span class="project-tag">SaaS — Live</span>
-        </div>
-        <p class="project-desc">
-          A writing and planning tool that helps turn rough ideas into structured stories.
-          Built end-to-end: product, design, implementation. Optimized for fast iteration and low-friction UX.
-        </p>
+<section id="projects">
 
-        <!-- Add this file in repo root: assets/plotfirst-volta-world.png -->
-        <div class="project-visual">
-          <img src="assets/plotfirst-volta-world.png" alt="PlotFirst — world entry screen" loading="lazy" />
-          <div class="project-visual-caption">World entry → structured story planning</div>
-        </div>
+<div class="section-label">Selected Projects</div>
 
-        <a href="https://plotfirst.app/" target="_blank" rel="noopener" class="project-link">Visit ↗</a>
-      </div>
+<div class="project-grid">
 
-      <!-- Arkhe -->
-      <div class="project-card fade-up">
-        <div class="project-top">
-          <span class="project-index">02</span>
-          <span class="project-emoji">🧪</span>
-        </div>
-        <div class="project-header">
-          <h3 class="project-title">Arkhe</h3>
-          <span class="project-tag">Sandbox — Live</span>
-        </div>
-        <p class="project-desc">
-          A live, evolving space for creation, play, and experimentation in public.
-          Built and shipped early, iterated in the open, used as a sandbox for interaction and tooling ideas.
-        </p>
+<!-- PlotFirst -->
 
-        <!-- Add this file in repo root: assets/arkhe-code-snippets.png -->
-        <div class="project-visual">
-          <img src="assets/arkhe-code-snippets.png" alt="Arkhe — code snippets grid" loading="lazy" />
-          <div class="project-visual-caption">Fast, searchable code patterns</div>
-        </div>
+<div class="project-card">
 
-        <a href="https://arkhe.live/" target="_blank" rel="noopener" class="project-link">Visit ↗</a>
-      </div>
+<h3 class="project-title">PlotFirst</h3>
 
-      <!-- Volta -->
-      <div class="project-card fade-up">
-        <div class="project-top">
-          <span class="project-index">03</span>
-          <span class="project-emoji">🧭</span>
-        </div>
-        <div class="project-header">
-          <h3 class="project-title">Volta do Mar</h3>
-          <span class="project-tag">Game — In Progress</span>
-        </div>
-        <p class="project-desc">
-          An exploration game about ecological restoration across an ocean archipelago.
-          Blends 2D + 3D gameplay with a mythic tone. Built in Godot — fog clearing, wind traversal, a one-island vertical slice.
-        </p>
-        <!-- Optional later: add assets/volta-gameplay.gif as a project-visual -->
-      </div>
+<p class="project-desc">
+A writing and planning tool that turns rough ideas into structured
+stories. Built end-to-end: product, design, and implementation.
+</p>
 
-      <!-- Writing -->
-      <div class="project-card fade-up">
-        <div class="project-top">
-          <span class="project-index">04</span>
-          <span class="project-emoji">⚔️</span>
-        </div>
-        <div class="project-header">
-          <h3 class="project-title">Wars of the Diadochi</h3>
-          <span class="project-tag">Writing — Ongoing</span>
-        </div>
-        <p class="project-desc">
-          Fan fiction exploring the successor wars after Alexander the Great — where history, ambition, and human drama collide.
-          A narrative project blending deep research with creative storytelling.
-        </p>
-      </div>
-    </div>
-  </section>
+<div class="project-visual">
 
-  <!-- ── Tools ── -->
-  <section id="tools">
-    <div class="section-label fade-up"><span>Tools & Software</span></div>
+<img
+src="./assets/plotfirst-volta-world.png"
+alt="PlotFirst world entry screen"
+loading="lazy"
+decoding="async">
 
-    <div class="tools-grid fade-up">
-      <div>
-        <div class="tool-group-label">Creative & Media</div>
-        <div class="tool-chips">
-          <span class="tool-chip">Blender</span>
-          <span class="tool-chip">GIMP</span>
-          <span class="tool-chip">Canva</span>
-          <span class="tool-chip">OBS</span>
-          <span class="tool-chip">Ableton Live</span>
-          <span class="tool-chip">Ableton Note</span>
-          <span class="tool-chip">Serato Scratch</span>
-        </div>
-      </div>
+<div class="project-caption">
+World entry → structured story planning
+</div>
 
-      <div>
-        <div class="tool-group-label">Development</div>
-        <div class="tool-chips">
-          <span class="tool-chip">Godot</span>
-          <span class="tool-chip">Claude Code</span>
-          <span class="tool-chip">Replit</span>
-          <span class="tool-chip">MIT App Inventor</span>
-        </div>
-      </div>
+</div>
 
-      <div>
-        <div class="tool-group-label">Product & Workflow</div>
-        <div class="tool-chips">
-          <span class="tool-chip">Notion</span>
-          <span class="tool-chip">Framer</span>
-          <span class="tool-chip">RCS Selector</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<a class="project-link" href="https://plotfirst.app" target="_blank">
+Visit ↗
+</a>
 
-  <!-- ── About ── -->
-  <section id="about">
-    <div class="section-label fade-up"><span>About</span></div>
+</div>
 
-    <div class="about-grid fade-up">
-      <div class="about-text">
-        <p>
-          I'm Mario — a software developer with 7+ years in education,
-          now building playful, human-centered tools across game dev, SaaS,
-          and creative spaces.
-        </p>
-        <p>
-          My work is driven by a belief that the best products feel like
-          worlds: they invite exploration, reward curiosity, and leave room
-          for surprise.
-        </p>
-        <p>
-          When I'm not building, I'm reading history, learning languages,
-          making music, taking photos, or getting lost in a good game.
-        </p>
-      </div>
 
-      <div class="about-meta">
-        <div>
-          <div class="meta-label">Location</div>
-          <div class="meta-value">California</div>
-        </div>
+<!-- Arkhe -->
 
-        <div>
-          <div class="meta-label">Interests</div>
-          <div class="meta-value">History, language, art, photography, nature, music, gaming</div>
-        </div>
+<div class="project-card">
 
-        <div>
-          <div class="meta-label">Email</div>
-          <div class="meta-value"><a href="mailto:hyphysaurus@gmail.com">hyphysaurus@gmail.com</a></div>
-        </div>
+<h3 class="project-title">Arkhe</h3>
 
-        <div>
-          <div class="meta-label">Links</div>
-          <div class="meta-value">
-            <a href="https://plotfirst.app/" target="_blank" rel="noopener">PlotFirst</a> ·
-            <a href="https://arkhe.live/" target="_blank" rel="noopener">Arkhe</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<p class="project-desc">
+A live sandbox for experimentation and tool building in public —
+a space to prototype interaction patterns and dev utilities.
+</p>
 
-  <!-- ── Footer ── -->
-  <footer>
-    <div class="footer-inner">
-      <span class="footer-text">© Mario Ramirez 2026</span>
-      <div class="footer-links">
-        <a href="https://plotfirst.app/" target="_blank" rel="noopener">PlotFirst</a>
-        <a href="https://arkhe.live/" target="_blank" rel="noopener">Arkhe</a>
-        <a href="mailto:hyphysaurus@gmail.com">Email</a>
-      </div>
-    </div>
-  </footer>
+<div class="project-visual">
 
-  <!-- ── Scripts ── -->
-  <script>
-    // Sticky nav background on scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
+<img
+src="./assets/arkhe-code-snippets.png"
+alt="Arkhe code snippets grid"
+loading="lazy"
+decoding="async">
 
-    // Scroll-triggered fade-in
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+<div class="project-caption">
+Fast, searchable code patterns
+</div>
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
+</div>
+
+<a class="project-link" href="https://arkhe.live" target="_blank">
+Visit ↗
+</a>
+
+</div>
+
+
+<!-- Volta -->
+
+<div class="project-card">
+
+<h3 class="project-title">Volta do Mar</h3>
+
+<p class="project-desc">
+An exploration game about ecological restoration across an ocean
+archipelago. Built in Godot with fog clearing and wind traversal.
+</p>
+
+</div>
+
+
+<!-- Writing -->
+
+<div class="project-card">
+
+<h3 class="project-title">Wars of the Diadochi</h3>
+
+<p class="project-desc">
+Narrative writing exploring the successor wars after Alexander
+the Great — where ambition and history collide.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<span>© Mario Ramirez 2026</span>
+
+<div>
+<a href="https://plotfirst.app">PlotFirst</a> |
+<a href="https://arkhe.live">Arkhe</a> |
+<a href="mailto:hyphysaurus@gmail.com">Email</a>
+</div>
+
+</footer>
+
+
+<script>
+
+const nav=document.querySelector("nav")
+
+window.addEventListener("scroll",()=>{
+if(window.scrollY>30){
+nav.style.boxShadow="0 4px 18px rgba(0,0,0,.04)"
+}else{
+nav.style.boxShadow="none"
+}
+})
+
+</script>
+
 </body>
 </html>

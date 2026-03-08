@@ -1,15 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Mario Ramirez — Portfolio</title>
 
-<meta name="description"
-content="Software developer building playful, human-centered tools across game dev, SaaS, and creative spaces.">
+<meta name="description" content="Software developer building playful, human-centered tools across game dev, SaaS, and creative spaces.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,12 +59,12 @@ z-index:-1;
 }
 
 @keyframes topoDrift{
-
 0%{transform:translate(0,0)}
 50%{transform:translate(-40px,-20px)}
 100%{transform:translate(0,0)}
-
 }
+
+/* BASIC */
 
 img{
 display:block;
@@ -74,19 +73,16 @@ border-radius:12px;
 }
 
 :root{
-
 --green:#5A7A5A;
 --green-soft:#E8F0E4;
 --card:#F4F2EF;
 --text-soft:#6B6560;
 --max:1080px;
-
 }
 
 /* NAV */
 
 nav{
-
 position:fixed;
 top:0;
 width:100%;
@@ -95,241 +91,222 @@ background:rgba(250,249,247,.9);
 backdrop-filter:blur(12px);
 border-bottom:1px solid #eae7e3;
 z-index:100;
-
 }
 
 .nav-inner{
-
 max-width:var(--max);
 margin:auto;
 height:100%;
-
 display:flex;
 align-items:center;
 justify-content:space-between;
-
 padding:0 28px;
-
 }
 
 /* HERO */
 
 .hero{
-
 max-width:var(--max);
 margin:auto;
-
 padding:160px 28px 80px;
-
 }
 
 .hero h1{
-
 font-family:'Instrument Serif',serif;
 font-size:64px;
 font-weight:400;
 line-height:1.1;
-
 }
 
-.hero em{
-color:var(--green);
-font-style:italic;
-}
+.hero em{color:var(--green)}
 
 .hero p{
-
 margin-top:24px;
 font-size:18px;
 color:var(--text-soft);
 max-width:520px;
-
 }
 
 /* SECTIONS */
 
 section{
-
 max-width:var(--max);
 margin:auto;
 padding:60px 28px;
-
 }
 
 .section-label{
-
 font-size:12px;
 letter-spacing:.12em;
 text-transform:uppercase;
 color:var(--green);
 margin-bottom:30px;
-
 }
 
 /* CURRENTLY BUILDING */
 
 .now-grid{
-
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:20px;
-
 }
 
 .now-card{
-
 background:var(--card);
 padding:24px;
 border-radius:12px;
-
 transition:.3s;
-
 }
 
 .now-card:hover{
-
 background:var(--green-soft);
 transform:translateY(-4px);
-
 }
 
 .now-card h3{
-
 font-family:'Instrument Serif',serif;
 font-size:22px;
 margin-bottom:6px;
-
 }
 
 .now-card p{
-
 font-size:14px;
 color:var(--text-soft);
+}
+
+/* WORLD MAP */
+
+.map-wrapper{
+overflow:hidden;
+border-radius:18px;
+border:1px solid rgba(0,0,0,.06);
+background:#eef3ea;
+cursor:grab;
+}
+
+.map{
+position:relative;
+height:480px;
+transform-origin:center;
+transition:transform .15s ease;
+}
+
+.map-node{
+
+position:absolute;
+background:white;
+
+padding:10px 14px;
+
+border-radius:999px;
+border:1px solid rgba(0,0,0,.08);
+
+display:flex;
+gap:6px;
+align-items:center;
+
+font-size:14px;
+
+cursor:pointer;
+
+transition:.25s;
 
 }
+
+.map-node:hover{
+transform:scale(1.1);
+box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
+
+.volta{top:55%;left:40%}
+.plotfirst{top:30%;left:65%}
+.arkhe{top:70%;left:60%}
+.diadochi{top:40%;left:15%}
 
 /* PROJECTS */
 
 .project-grid{
-
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:22px;
-
 }
 
 .project-card{
-
 background:var(--card);
-
 padding:28px;
-
 border-radius:14px;
-
 display:flex;
 flex-direction:column;
 gap:14px;
-
 transition:.35s;
-
 }
 
 .project-card:hover{
-
 background:var(--green-soft);
 transform:translateY(-5px);
-
 }
 
 .project-title{
-
 font-family:'Instrument Serif',serif;
 font-size:24px;
-
 }
 
 .project-desc{
-
 font-size:14px;
 color:var(--text-soft);
-
 }
 
 .project-visual{
-
 overflow:hidden;
 border-radius:12px;
 border:1px solid rgba(0,0,0,.08);
-
 }
 
 .project-visual img{
-
 transition:transform .4s ease;
-
 }
 
 .project-card:hover img{
-
 transform:scale(1.04);
-
 }
 
 .project-caption{
-
 font-size:12px;
 color:#777;
 padding:8px 10px;
 border-top:1px solid rgba(0,0,0,.06);
 background:#fff;
-
 }
 
 .project-link{
-
 margin-top:6px;
 color:var(--green);
 font-size:14px;
 font-weight:500;
-
 }
 
 /* FOOTER */
 
 footer{
-
 margin-top:60px;
 border-top:1px solid #eae7e3;
-
 padding:30px 28px;
-
 max-width:var(--max);
 margin-left:auto;
 margin-right:auto;
-
 display:flex;
 justify-content:space-between;
-
 font-size:12px;
 color:#888;
-
 }
 
 /* MOBILE */
 
 @media(max-width:900px){
 
-.project-grid{
-grid-template-columns:1fr;
-}
-
-.now-grid{
-grid-template-columns:1fr;
-}
-
-.hero h1{
-font-size:42px;
-}
+.project-grid{grid-template-columns:1fr}
+.now-grid{grid-template-columns:1fr}
+.hero h1{font-size:42px}
 
 }
 
@@ -337,18 +314,13 @@ font-size:42px;
 
 </head>
 
-
 <body>
 
 <nav>
 <div class="nav-inner">
 <strong>Mario R.</strong>
-<div>
-<a href="#projects">Projects</a>
-</div>
 </div>
 </nav>
-
 
 <header class="hero">
 
@@ -358,12 +330,10 @@ of product & play
 </h1>
 
 <p>
-Software developer with a background in education, now creating
-human-centered tools, games, and stories.
+Software developer creating tools, worlds, and experiments.
 </p>
 
 </header>
-
 
 <section>
 
@@ -372,42 +342,45 @@ human-centered tools, games, and stories.
 <div class="now-grid">
 
 <div class="now-card">
-
 <h3>Volta</h3>
-
-<p>
-A myth-inspired exploration game built in Godot.
-Currently developing traversal mechanics and a vertical slice island.
-</p>
-
+<p>Myth-inspired exploration game built in Godot.</p>
 </div>
 
 <div class="now-card">
-
 <h3>PlotFirst</h3>
-
-<p>
-A storytelling platform helping writers and designers
-turn ideas into structured narrative worlds.
-</p>
-
+<p>Structured storytelling platform for writers and designers.</p>
 </div>
 
 <div class="now-card">
-
 <h3>Arkhe</h3>
-
-<p>
-An experimental sandbox for building and testing tools,
-interaction patterns, and developer workflows.
-</p>
-
+<p>Experimental sandbox for building tools and dev workflows.</p>
 </div>
 
 </div>
 
 </section>
 
+<section>
+
+<div class="section-label">Project Worlds</div>
+
+<div class="map-wrapper" id="mapWrapper">
+
+<div class="map" id="map">
+
+<div class="map-node volta" onclick="scrollToProject('volta')">🧭 Volta</div>
+
+<div class="map-node plotfirst" onclick="scrollToProject('plotfirst')">✍️ PlotFirst</div>
+
+<div class="map-node arkhe" onclick="scrollToProject('arkhe')">🧪 Arkhe</div>
+
+<div class="map-node diadochi" onclick="scrollToProject('diadochi')">⚔️ Diadochi</div>
+
+</div>
+
+</div>
+
+</section>
 
 <section id="projects">
 
@@ -415,98 +388,66 @@ interaction patterns, and developer workflows.
 
 <div class="project-grid">
 
-<!-- PlotFirst -->
-
-<div class="project-card">
+<div class="project-card" id="plotfirst">
 
 <h3 class="project-title">PlotFirst</h3>
 
 <p class="project-desc">
-A writing and planning tool turning rough ideas into structured stories.
+A writing tool turning rough ideas into structured stories.
 </p>
 
 <div class="project-visual">
 
-<img
-src="./assets/plotfirst-volta-world.png"
-alt="PlotFirst world entry screen"
-loading="lazy"
-decoding="async">
+<img src="./assets/plotfirst-volta-world.png" loading="lazy">
 
 <div class="project-caption">
-
 World entry → structured story planning
-
 </div>
 
 </div>
 
-<a class="project-link" href="https://plotfirst.app" target="_blank">
-
-Visit ↗
-
-</a>
+<a class="project-link" href="https://plotfirst.app" target="_blank">Visit ↗</a>
 
 </div>
 
-
-<!-- Arkhe -->
-
-<div class="project-card">
+<div class="project-card" id="arkhe">
 
 <h3 class="project-title">Arkhe</h3>
 
 <p class="project-desc">
-A live sandbox for experimenting with dev tools and interaction systems.
+Sandbox for experimenting with dev tools and interaction systems.
 </p>
 
 <div class="project-visual">
 
-<img
-src="./assets/arkhe-code-snippets.png"
-alt="Arkhe code snippets grid"
-loading="lazy"
-decoding="async">
+<img src="./assets/arkhe-code-snippets.png" loading="lazy">
 
 <div class="project-caption">
-
 Fast, searchable code patterns
-
 </div>
 
 </div>
 
-<a class="project-link" href="https://arkhe.live" target="_blank">
-
-Visit ↗
-
-</a>
+<a class="project-link" href="https://arkhe.live" target="_blank">Visit ↗</a>
 
 </div>
 
-
-<!-- Volta -->
-
-<div class="project-card">
+<div class="project-card" id="volta">
 
 <h3 class="project-title">Volta do Mar</h3>
 
 <p class="project-desc">
-An exploration game about ecological restoration across an ocean archipelago.
-Built in Godot.
+Exploration game about restoring islands across an archipelago.
 </p>
 
 </div>
 
-
-<!-- Writing -->
-
-<div class="project-card">
+<div class="project-card" id="diadochi">
 
 <h3 class="project-title">Wars of the Diadochi</h3>
 
 <p class="project-desc">
-A historical narrative project exploring the wars after Alexander the Great.
+Historical narrative project exploring the successor wars after Alexander the Great.
 </p>
 
 </div>
@@ -515,21 +456,67 @@ A historical narrative project exploring the wars after Alexander the Great.
 
 </section>
 
-
 <footer>
 
 <span>© Mario Ramirez 2026</span>
 
 <div>
-
 <a href="https://plotfirst.app">PlotFirst</a> |
 <a href="https://arkhe.live">Arkhe</a> |
 <a href="mailto:hyphysaurus@gmail.com">Email</a>
-
 </div>
 
 </footer>
 
+<script>
+
+/* SMOOTH SCROLL */
+
+function scrollToProject(id){
+
+document.getElementById(id).scrollIntoView({
+behavior:"smooth"
+})
+
+}
+
+/* DRAG MAP */
+
+const map=document.getElementById("map")
+const wrapper=document.getElementById("mapWrapper")
+
+let scale=1
+let isDragging=false
+let startX,startY
+let offsetX=0,offsetY=0
+
+wrapper.addEventListener("mousedown",e=>{
+isDragging=true
+startX=e.clientX-offsetX
+startY=e.clientY-offsetY
+wrapper.style.cursor="grabbing"
+})
+
+window.addEventListener("mouseup",()=>{
+isDragging=false
+wrapper.style.cursor="grab"
+})
+
+window.addEventListener("mousemove",e=>{
+if(!isDragging)return
+offsetX=e.clientX-startX
+offsetY=e.clientY-startY
+map.style.transform=`translate(${offsetX}px,${offsetY}px) scale(${scale})`
+})
+
+wrapper.addEventListener("wheel",e=>{
+e.preventDefault()
+scale+=e.deltaY*-0.001
+scale=Math.min(Math.max(.8,scale),2)
+map.style.transform=`translate(${offsetX}px,${offsetY}px) scale(${scale})`
+})
+
+</script>
 
 </body>
 

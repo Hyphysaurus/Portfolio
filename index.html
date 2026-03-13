@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mario Ramirez — Portfolio</title>
-  <meta name="description" content="Software developer building playful, human-centered tools across game dev, SaaS, and creative spaces." />
+  <meta name="description" content="Educator and media-trained creative transitioning into software development — building human-centered tools, games, and stories." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com/" />
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
@@ -90,8 +90,16 @@
     .nav-links a {
       font-size: 13px; font-weight: 400; color: var(--text-muted);
       letter-spacing: 0.03em; transition: color 0.25s;
+      position: relative; padding-bottom: 3px;
+    }
+    .nav-links a:not(.nav-contact)::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0;
+      height: 1.5px; background: var(--green); transition: width 0.2s; border-radius: 1px;
     }
     .nav-links a:hover { color: var(--green); }
+    .nav-links a:not(.nav-contact):hover::after { width: 100%; }
+    .nav-links a.active { color: var(--green); }
+    .nav-links a.active::after { width: 100%; }
     .nav-contact {
       font-size: 13px; font-weight: 500;
       color: var(--text);
@@ -134,6 +142,25 @@
       transform-origin: left;
       animation: drawLine 0.9s ease 0.7s forwards;
       transform: scaleX(0);
+    }
+
+    /* ── Availability Badge (from Portfolio 2) ── */
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(90,122,90,0.4); }
+      60% { box-shadow: 0 0 0 8px rgba(90,122,90,0); }
+    }
+    .avail-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #fff;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+      padding: 7px 16px; border-radius: 100px;
+      animation: pulse 2.4s infinite, fadeUp 0.8s ease 0.65s forwards;
+      opacity: 0;
+      margin-top: 24px;
+    }
+    .avail-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #fff; flex-shrink: 0;
     }
 
     /* ── Sections ── */
@@ -180,13 +207,16 @@
       background: var(--card-bg);
       border-radius: 14px; padding: 30px;
       display: flex; flex-direction: column; gap: 16px;
-      transition: all 0.35s ease;
+      transition: all 0.35s ease, opacity 0.35s ease;
       cursor: default; position: relative;
     }
     .project-card:hover {
       background: var(--green-hover);
       transform: translateY(-3px);
       box-shadow: 0 8px 32px rgba(90,122,90,0.08);
+    }
+    .project-grid:hover .project-card:not(:hover) {
+      opacity: 0.35;
     }
     .project-top { display: flex; justify-content: space-between; align-items: center; }
     .project-index { font-size: 12px; font-weight: 500; color: #b5afa8; letter-spacing: 0.05em; }
@@ -307,57 +337,35 @@
   <!-- ── Hero ── -->
   <header class="hero">
     <h1>
-      <span>Building at the</span>
-      <span><em>intersection</em> of</span>
-      <span>product & play</span>
+      <span>Educator, creator,</span>
+      <span><em>aspiring</em> developer</span>
     </h1>
     <p class="hero-sub">
-      Software developer with a background in education, now creating
-      human‑centered tools, games, and stories.
+      7+ years in education and service, now channeling a love for
+      media, storytelling, and technology into building human‑centered
+      tools, games, and creative projects.
     </p>
+    <div class="avail-badge">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
     <div class="hero-divider"></div>
   </header>
 
   <!-- ── Work ── -->
   <section id="work">
     <div class="section-label fade-up"><span>Background</span></div>
-
-    <div class="fade-up">
-      <div class="timeline-item">
-        <span class="time-period">2024 — Present</span>
-        <div>
-          <h3 class="time-title">Independent Software Developer</h3>
-          <p class="time-desc">
-            Building PlotFirst, Arkhe, and Volta do Mar — products spanning SaaS, creative tooling, and game development.
-            Shipping end-to-end: product vision, design, engineering.
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <span class="time-period">2017 — 2024</span>
-        <div>
-          <h3 class="time-title">Educator</h3>
-          <p class="time-desc">
-            7+ years working directly with people — developing curriculum, leading teams, and building systems for learning.
-            ServSafe certified. This is where the product instinct started.
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <span class="time-period">Previously</span>
-        <div>
-          <h3 class="time-title">Shift Lead — Five Guys</h3>
-          <p class="time-desc">Team leadership, operations, quality standards. Fast environments, real accountability.</p>
-        </div>
-      </div>
-    </div>
+    <div id="work-timeline" class="fade-up"></div>
 
     <div class="edu fade-up">
       <div class="section-label"><span>Education</span></div>
       <span class="edu-degree">B.A., International Relations</span>
       <span class="edu-school">University of California, Davis</span>
+    </div>
+
+    <div class="edu fade-up" style="margin-top: 36px;">
+      <div class="section-label"><span>Media Training</span></div>
+      <div id="media-training"></div>
     </div>
   </section>
 
@@ -368,128 +376,13 @@
       The through-line: building things that feel alive — tools for
       storytelling, spaces for experimentation, worlds worth exploring.
     </p>
-
-    <div class="project-grid">
-      <!-- PlotFirst -->
-      <div class="project-card fade-up">
-        <div class="project-top">
-          <span class="project-index">01</span>
-          <span class="project-emoji">✍️</span>
-        </div>
-        <div class="project-header">
-          <h3 class="project-title">PlotFirst</h3>
-          <span class="project-tag">SaaS — Live</span>
-        </div>
-        <p class="project-desc">
-          A writing and planning tool that helps turn rough ideas into structured stories.
-          Built end-to-end: product, design, implementation. Optimized for fast iteration and low-friction UX.
-        </p>
-
-        <!-- Add this file in repo root: assets/plotfirst-volta-world.png -->
-        <div class="project-visual">
-          <img src="assets/plotfirst-volta-world.png" alt="PlotFirst — world entry screen" loading="lazy" />
-          <div class="project-visual-caption">World entry → structured story planning</div>
-        </div>
-
-        <a href="https://plotfirst.app/" target="_blank" rel="noopener" class="project-link">Visit ↗</a>
-      </div>
-
-      <!-- Arkhe -->
-      <div class="project-card fade-up">
-        <div class="project-top">
-          <span class="project-index">02</span>
-          <span class="project-emoji">🧪</span>
-        </div>
-        <div class="project-header">
-          <h3 class="project-title">Arkhe</h3>
-          <span class="project-tag">Sandbox — Live</span>
-        </div>
-        <p class="project-desc">
-          A live, evolving space for creation, play, and experimentation in public.
-          Built and shipped early, iterated in the open, used as a sandbox for interaction and tooling ideas.
-        </p>
-
-        <!-- Add this file in repo root: assets/arkhe-code-snippets.png -->
-        <div class="project-visual">
-          <img src="assets/arkhe-code-snippets.png" alt="Arkhe — code snippets grid" loading="lazy" />
-          <div class="project-visual-caption">Fast, searchable code patterns</div>
-        </div>
-
-        <a href="https://arkhe.live/" target="_blank" rel="noopener" class="project-link">Visit ↗</a>
-      </div>
-
-      <!-- Volta -->
-      <div class="project-card fade-up">
-        <div class="project-top">
-          <span class="project-index">03</span>
-          <span class="project-emoji">🧭</span>
-        </div>
-        <div class="project-header">
-          <h3 class="project-title">Volta do Mar</h3>
-          <span class="project-tag">Game — In Progress</span>
-        </div>
-        <p class="project-desc">
-          An exploration game about ecological restoration across an ocean archipelago.
-          Blends 2D + 3D gameplay with a mythic tone. Built in Godot — fog clearing, wind traversal, a one-island vertical slice.
-        </p>
-        <!-- Optional later: add assets/volta-gameplay.gif as a project-visual -->
-      </div>
-
-      <!-- Writing -->
-      <div class="project-card fade-up">
-        <div class="project-top">
-          <span class="project-index">04</span>
-          <span class="project-emoji">⚔️</span>
-        </div>
-        <div class="project-header">
-          <h3 class="project-title">Wars of the Diadochi</h3>
-          <span class="project-tag">Writing — Ongoing</span>
-        </div>
-        <p class="project-desc">
-          Fan fiction exploring the successor wars after Alexander the Great — where history, ambition, and human drama collide.
-          A narrative project blending deep research with creative storytelling.
-        </p>
-      </div>
-    </div>
+    <div id="project-grid" class="project-grid"></div>
   </section>
 
   <!-- ── Tools ── -->
   <section id="tools">
     <div class="section-label fade-up"><span>Tools & Software</span></div>
-
-    <div class="tools-grid fade-up">
-      <div>
-        <div class="tool-group-label">Creative & Media</div>
-        <div class="tool-chips">
-          <span class="tool-chip">Blender</span>
-          <span class="tool-chip">GIMP</span>
-          <span class="tool-chip">Canva</span>
-          <span class="tool-chip">OBS</span>
-          <span class="tool-chip">Ableton Live</span>
-          <span class="tool-chip">Ableton Note</span>
-          <span class="tool-chip">Serato Scratch</span>
-        </div>
-      </div>
-
-      <div>
-        <div class="tool-group-label">Development</div>
-        <div class="tool-chips">
-          <span class="tool-chip">Godot</span>
-          <span class="tool-chip">Claude Code</span>
-          <span class="tool-chip">Replit</span>
-          <span class="tool-chip">MIT App Inventor</span>
-        </div>
-      </div>
-
-      <div>
-        <div class="tool-group-label">Product & Workflow</div>
-        <div class="tool-chips">
-          <span class="tool-chip">Notion</span>
-          <span class="tool-chip">Framer</span>
-          <span class="tool-chip">RCS Selector</span>
-        </div>
-      </div>
-    </div>
+    <div id="tools-grid" class="tools-grid fade-up"></div>
   </section>
 
   <!-- ── About ── -->
@@ -499,18 +392,21 @@
     <div class="about-grid fade-up">
       <div class="about-text">
         <p>
-          I'm Mario — a software developer with 7+ years in education,
-          now building playful, human-centered tools across game dev, SaaS,
-          and creative spaces.
+          I'm Mario — an educator and creative with 7+ years in
+          education and food service, now transitioning into software
+          development and media production.
         </p>
         <p>
-          My work is driven by a belief that the best products feel like
-          worlds: they invite exploration, reward curiosity, and leave room
-          for surprise.
+          I've spent years leading teams, building curriculum, and working
+          directly with people. That background shapes how I think about
+          products: they should feel alive, invite exploration, and
+          leave room for surprise.
         </p>
         <p>
-          When I'm not building, I'm reading history, learning languages,
-          making music, taking photos, or getting lost in a good game.
+          I'm self-taught in development and trained in media through
+          broadcasting and production coursework. When I'm not building,
+          I'm reading history, learning languages, making music, taking
+          photos, or getting lost in a good game.
         </p>
       </div>
 
@@ -555,10 +451,180 @@
 
   <!-- ── Scripts ── -->
   <script>
-    // Sticky nav background on scroll
+    // ╔══════════════════════════════════════════════════════════════╗
+    // ║  EDIT YOUR CONTENT HERE — just change the text below!       ║
+    // ╚══════════════════════════════════════════════════════════════╝
+
+    // ── WORK HISTORY ──
+    // Add, remove, or reorder entries. Each needs: period, title, desc.
+    const WORK = [
+      {
+        period:  "2017 — 2024",
+        title:   "Educator",
+        desc:    "7+ years working directly with people — developing curriculum, leading teams, and building systems for learning. ServSafe certified. This is where the instinct for clear communication and human-centered thinking started.",
+      },
+      {
+        period:  "Previously",
+        title:   "Shift Lead — Five Guys",
+        desc:    "Team leadership, operations, quality standards. Fast environments, real accountability.",
+      },
+      {
+        period:  "2024 — Present",
+        title:   "Self-Directed Developer (Transition)",
+        desc:    "Teaching myself to build software — shipping real projects across SaaS, creative tooling, and game development. Learning by doing: PlotFirst, Arkhe, and Volta do Mar are all built end-to-end.",
+      },
+    ];
+
+    // ── MEDIA TRAINING ──
+    // Add more classes by copying a { school, title, desc } block.
+    const MEDIA = [
+      {
+        school:  "Ohlone College",
+        title:   "Broadcasting",
+        desc:    "Hands-on coursework including a live radio production component.",
+      },
+      {
+        school:  "UC Davis",
+        title:   "CTS Media",
+        desc:    "Media production class covering OBS, live streaming workflows, and content creation tools.",
+      },
+      // ↓ Add more media classes here — just copy the pattern above ↓
+    ];
+
+    // ── PROJECTS ──
+    // Each project needs: emoji, title, tag, desc.
+    // Optional: link (URL string), image (src path), imageAlt, imageCaption.
+    const PROJECTS = [
+      {
+        emoji:        "✍️",
+        title:        "PlotFirst",
+        tag:          "SaaS — Live",
+        desc:         "A writing and planning tool that helps turn rough ideas into structured stories. Built end-to-end: product, design, implementation. Optimized for fast iteration and low-friction UX.",
+        link:         "https://plotfirst.app/",
+        image:        "assets/plotfirst-volta-world.png",
+        imageAlt:     "PlotFirst — world entry screen",
+        imageCaption: "World entry → structured story planning",
+      },
+      {
+        emoji:        "🧪",
+        title:        "Arkhe",
+        tag:          "Sandbox — Live",
+        desc:         "A live, evolving space for creation, play, and experimentation in public. Built and shipped early, iterated in the open, used as a sandbox for interaction and tooling ideas.",
+        link:         "https://arkhe.live/",
+        image:        "assets/arkhe-code-snippets.png",
+        imageAlt:     "Arkhe — code snippets grid",
+        imageCaption: "Fast, searchable code patterns",
+      },
+      {
+        emoji:   "🧭",
+        title:   "Volta do Mar",
+        tag:     "Game — In Progress",
+        desc:    "An exploration game about ecological restoration across an ocean archipelago. Blends 2D + 3D gameplay with a mythic tone. Built in Godot — fog clearing, wind traversal, a one-island vertical slice.",
+      },
+      {
+        emoji:   "⚔️",
+        title:   "Wars of the Diadochi",
+        tag:     "Writing — Ongoing",
+        desc:    "Fan fiction exploring the successor wars after Alexander the Great — where history, ambition, and human drama collide. A narrative project blending deep research with creative storytelling.",
+      },
+    ];
+
+    // ── TOOLS & SOFTWARE ──
+    // Each group has a label and a list of items.
+    // To remove a tool: delete it from the list.
+    // To add a tool: type it into the list.
+    // To remove a whole group: delete the { label, items } block.
+    const TOOLS = [
+      {
+        label: "Creative & Media",
+        items: ["Blender", "GIMP", "Canva", "OBS", "Ableton Live", "Ableton Note", "Serato Scratch"],
+      },
+      {
+        label: "Development",
+        items: ["Godot", "Claude Code", "Replit", "MIT App Inventor"],
+      },
+      {
+        label: "Product & Workflow",
+        items: ["Notion"],
+      },
+    ];
+
+    // ╔══════════════════════════════════════════════════════════════╗
+    // ║  STOP EDITING — everything below renders the data above     ║
+    // ╚══════════════════════════════════════════════════════════════╝
+
+    // Render work timeline
+    document.getElementById('work-timeline').innerHTML = WORK.map(w => `
+      <div class="timeline-item">
+        <span class="time-period">${w.period}</span>
+        <div>
+          <h3 class="time-title">${w.title}</h3>
+          <p class="time-desc">${w.desc}</p>
+        </div>
+      </div>
+    `).join('');
+
+    // Render media training
+    document.getElementById('media-training').innerHTML = MEDIA.map((m, i) => `
+      <div class="timeline-item" style="padding-top: 0;${i < MEDIA.length - 1 ? ' border-bottom: none;' : ''}">
+        <span class="time-period">${m.school}</span>
+        <div>
+          <h3 class="time-title">${m.title}</h3>
+          <p class="time-desc">${m.desc}</p>
+        </div>
+      </div>
+    `).join('');
+
+    // Render projects
+    document.getElementById('project-grid').innerHTML = PROJECTS.map((p, i) => {
+      const idx = String(i + 1).padStart(2, '0');
+      const visual = p.image ? `
+        <div class="project-visual">
+          <img src="${p.image}" alt="${p.imageAlt || ''}" loading="lazy" />
+          ${p.imageCaption ? `<div class="project-visual-caption">${p.imageCaption}</div>` : ''}
+        </div>` : '';
+      const link = p.link ? `<a href="${p.link}" target="_blank" rel="noopener" class="project-link">Visit ↗</a>` : '';
+      return `
+        <div class="project-card fade-up">
+          <div class="project-top">
+            <span class="project-index">${idx}</span>
+            <span class="project-emoji">${p.emoji}</span>
+          </div>
+          <div class="project-header">
+            <h3 class="project-title">${p.title}</h3>
+            <span class="project-tag">${p.tag}</span>
+          </div>
+          <p class="project-desc">${p.desc}</p>
+          ${visual}
+          ${link}
+        </div>`;
+    }).join('');
+
+    // Render tools
+    document.getElementById('tools-grid').innerHTML = TOOLS.map(g => `
+      <div>
+        <div class="tool-group-label">${g.label}</div>
+        <div class="tool-chips">
+          ${g.items.map(t => `<span class="tool-chip">${t}</span>`).join('\n          ')}
+        </div>
+      </div>
+    `).join('');
+
+    // ── Scroll behavior ──
     const nav = document.getElementById('nav');
+    const navLinks = document.querySelectorAll('.nav-links a:not(.nav-contact)');
+    const sections = document.querySelectorAll('section[id]');
+
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
+      let current = '';
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top > -200 && top < 400) current = section.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
     }, { passive: true });
 
     // Scroll-triggered fade-in

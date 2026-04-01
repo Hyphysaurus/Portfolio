@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Mario Ramirez</title>
+  <meta name="description" content="Projects I've built — SaaS tools, games, automation, and creative writing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com/" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/shared.css" />
+</head>
+<body>
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Mario R.</a>
+      <div class="nav-links">
+        <a href="work.html" class="active">Work</a>
+        <a href="about.html">About</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="mailto:hyphysaurus@gmail.com" class="nav-contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1><span>Work</span></h1>
+    <p class="hero-sub">
+      The through-line: building things that feel alive —
+      tools, games, and systems worth exploring.
+    </p>
+    <div class="hero-divider"></div>
+  </header>
+
+  <!-- Shipped -->
+  <section>
+    <div class="section-label fade-up"><span>Shipped</span></div>
+    <div id="shipped-list" class="fade-up"></div>
+  </section>
+
+  <!-- In Progress -->
+  <section>
+    <div class="section-label fade-up"><span>In Progress</span></div>
+    <div id="progress-list" class="fade-up"></div>
+  </section>
+
+  <!-- Writing -->
+  <section>
+    <div class="section-label fade-up"><span>Writing</span></div>
+    <div id="writing-list" class="fade-up"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-text">&copy; Mario Ramirez 2026</span>
+      <div class="footer-links">
+        <a href="https://plotfirst.app/" target="_blank" rel="noopener">PlotFirst</a>
+        <a href="https://mythicgrounds.com/" target="_blank" rel="noopener">Mythic Grounds</a>
+        <a href="https://arkhe.live/" target="_blank" rel="noopener">Arkhe</a>
+        <a href="mailto:hyphysaurus@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/projects.js"></script>
+  <script src="js/shared.js"></script>
+  <script>
+    (function() {
+      function renderWorkList(containerId, items) {
+        var container = document.getElementById(containerId);
+        items.forEach(function(item) {
+          var row = document.createElement('div');
+          row.className = 'work-item';
+
+          var content = document.createElement('div');
+          var title = document.createElement('div');
+          title.className = 'work-title';
+          title.textContent = item.title;
+          var desc = document.createElement('p');
+          desc.className = 'work-desc';
+          desc.textContent = item.desc;
+          content.appendChild(title);
+          content.appendChild(desc);
+
+          if (item.link) {
+            var link = document.createElement('a');
+            link.href = item.link;
+            link.target = '_blank';
+            link.rel = 'noopener';
+            link.className = 'work-link';
+            link.textContent = 'Visit \u2197';
+            content.appendChild(link);
+          }
+
+          var tag = document.createElement('span');
+          tag.className = 'work-tag';
+          tag.textContent = item.tag;
+
+          row.appendChild(content);
+          row.appendChild(tag);
+          container.appendChild(row);
+        });
+      }
+
+      renderWorkList('shipped-list', SHIPPED_PROJECTS);
+      renderWorkList('progress-list', IN_PROGRESS_PROJECTS);
+      renderWorkList('writing-list', WRITING_PROJECTS);
+    })();
+  </script>
+</body>
+</html>

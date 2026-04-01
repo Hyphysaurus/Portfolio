@@ -236,7 +236,7 @@ section { padding: 64px var(--px); max-width: var(--max-w); margin: 0 auto; }
   border: 1px solid rgba(138,133,128,0.22);
   background: #fff;
 }
-.project-visual img { width: 100%; height: auto; display: block; }
+.project-visual img { width: 100%; height: auto; display: block; max-height: 220px; object-fit: cover; }
 .project-visual-caption {
   font-size: 12px;
   font-weight: 400;
